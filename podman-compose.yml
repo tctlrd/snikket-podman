@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: proxy
-    image: docker.io/snikket/snikket-web-proxy:beta
+    image: docker.io/snikket/snikket-web-proxy:dev
     envFrom:
     - configMapRef:
         name: snikket_settings
@@ -18,7 +18,7 @@ spec:
     - name: acme_challenges
       mountPath: /var/www/html/.well-known/acme-challenge
   - name: certs
-    image: docker.io/snikket/snikket-cert-manager:beta
+    image: docker.io/snikket/snikket-cert-manager:dev
     envFrom:
     - configMapRef:
         name: snikket_settings
@@ -29,13 +29,13 @@ spec:
     - name: acme_challenges
       mountPath: /var/www/.well-known/acme-challenge
   - name: portal
-    image: docker.io/snikket/snikket-web-portal:beta
+    image: docker.io/snikket/snikket-web-portal:dev
     envFrom:
     - configMapRef:
         name: snikket_settings
         optional: false
   - name: server
-    image: docker.io/snikket/snikket-server:beta
+    image: docker.io/snikket/snikket-server:dev
     envFrom:
     - configMapRef:
         name: snikket_settings
