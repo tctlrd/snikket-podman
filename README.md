@@ -1,3 +1,11 @@
+## snikket-podman
+
+Create a snikket-settings.yml (see the .example) and then start it like:
+
+```
+sudo podman play kube --configmap ./snikket-settings.yml ./podman-compose.yml
+```
+
 # snikket-selfhosted
 
 This repository includes some helpful scripts and templates
@@ -19,12 +27,10 @@ Don't forget to run the commands as root (log in as root or use sudo).
 
 ### Step 1: Fetch the source
 
-```
-cd /opt
-git clone https://github.com/snikket-im/snikket-selfhosted snikket
-```
 
 ### Step 2: Configure
+
+
 
 An automatic configuration script is included:
 
@@ -34,6 +40,8 @@ cd snikket
 ```
 
 ### Step 3: Start!
+
+
 
 ```
 ./scripts/start.sh
