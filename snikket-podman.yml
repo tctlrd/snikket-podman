@@ -6,7 +6,7 @@ data:
   SNIKKET_DOMAIN: example.com
   SNIKKET_ADMIN_EMAIL: admin@example.com
   SNIKKET_LETSENCRYPT_TOS_AGREE: Y
-
+---
 apiVersion: v1
 kind: Pod
 metadata:
