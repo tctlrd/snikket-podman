@@ -1,4 +1,13 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env
+data:
+  SNIKKET_DOMAIN: example.com
+  SNIKKET_ADMIN_EMAIL: admin@example.com
+  SNIKKET_LETSENCRYPT_TOS_AGREE: Y
+
+apiVersion: v1
 kind: Pod
 metadata:
   name: snikket
@@ -10,44 +19,44 @@ spec:
     image: docker.io/snikket/snikket-web-proxy:dev
     envFrom:
     - configMapRef:
-        name: snikket_settings
+        name: env
         optional: false
     volumeMounts:
-    - name: snikket_data
+    - name: data
       mountPath: /snikket
-    - name: acme_challenges
+    - name: acme
       mountPath: /var/www/html/.well-known/acme-challenge
   - name: certs
     image: docker.io/snikket/snikket-cert-manager:dev
     envFrom:
     - configMapRef:
-        name: snikket_settings
+        name: env
         optional: false
     volumeMounts:
-    - name: snikket_data
+    - name: data
       mountPath: /snikket
-    - name: acme_challenges
+    - name: acme
       mountPath: /var/www/.well-known/acme-challenge
   - name: portal
     image: docker.io/snikket/snikket-web-portal:dev
     envFrom:
     - configMapRef:
-        name: snikket_settings
+        name: env
         optional: false
   - name: server
     image: docker.io/snikket/snikket-server:dev
     envFrom:
     - configMapRef:
-        name: snikket_settings
+        name: env
         optional: false
     volumeMounts:
-    - name: snikket_data
+    - name: data
       mountPath: /snikket
   hostNetwork: true
   volumes:
-  - name: snikket_data
+  - name: data
     PersistentVolumeClaim:
       claimName: snikket-data
-  - name: acme_challenges
+  - name: acme
     PersistentVolumeClaim:
-      claimName: snikket-acme-challenges
+      claimName: snikket-acme
